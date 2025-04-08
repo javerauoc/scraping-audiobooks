@@ -32,50 +32,7 @@ def limpiar_url(url):
         base = url_limpia.split('?')[0]
         return base if base.endswith('/') else base + '/'
 
-class Throttle:
+def salvar_to_csv(pd_llibres,csv_file):
 
-    """Add a delay between downloads to the same domain
-    """
-    def __init__(self, delay):
-        # amount of delay between downloads for each domain
-        self.delay = delay
-        # timestamp of when a domain was last accessed
-        self.domains = {}
-    def wait(self, url):
-        domain = urlparse(url).netloc
-        last_accessed = self.domains.get(domain)
-        if self.delay > 0 and last_accessed is not None:
-            sleep_secs = self.delay - (datetime.now() -
-                        last_accessed).seconds
-            if sleep_secs > 0:
-                # domain has been accessed recently
-                # so need to sleep
-                sleep(sleep_secs)
-        # update the last accessed time
-        self.domains[domain] = datetime.now()
+    pd_llibres.to_csv(csv_file,sep=';')
 
-def salvar_to_csv(pd_vehicles,csv_file):
-
-    pd_vehicles.to_csv(csv_file,sep=';')
-
-
-
-
-    ## Anem a buscar les dades !!
-
-
-def visualitzar_llista_vehicles(l_lista):
-
-    for i,e  in enumerate(l_lista):
-        print ("Vehicle {} -> Dades: {}".format(i,e))
-
-
-
-def flatter(lst):
-    ret = []
-    for elem in lst:
-        if isinstance(elem, list):
-            ret.extend(flatter(elem))
-        else:
-            ret.append(elem)
-    return ret
