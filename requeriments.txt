@@ -1,0 +1,11 @@
+pandas
+requests
+lxml
+beautifulsoup4
+ipython
+builtwith
+selenium
+websocket-client==1.2.3
+websocket
+html5lib
+fake_useragent
